@@ -15,12 +15,48 @@
     <title>Lab 3</title>
     <h:outputStylesheet library="styles" name="main.css"/>
     <h:outputStylesheet library="styles" name="header.css"/>
+    <h:outputStylesheet library="styles" name="clock.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
 </h:head>
 <h:body id="body">
     <div class="header">
         <p>Студент: Сладков Михаил Юрьевич</p>
         <p>Группа: P3231</p>
         <p>Вариант: 8385</p>
+    </div>
+    <div id="content">
+        <div id="clock-container">
+            <table id="clocks">
+                <tr id="time">
+                    <td id="hours-feild">
+                        <h:outputText id="hours" value="${timeBean.hours}"/>
+                    </td>
+                    <td class="separator">
+                        :
+                    </td>
+                    <td id="minutes-feild">
+                        <h:outputText id="minutes" value="${timeBean.minutes}"/>
+                    </td>
+                    <td class="separator">
+                        :
+                    </td>
+                    <td id="seconds-feild">
+                        <h:outputText id="seconds" value="${timeBean.seconds}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="date-feild" colspan="5">
+                        <h:outputText id="date" value="${timeBean.date}"/>
+                    </td>
+                </tr>
+            </table>
+            <script>
+                function time() {
+                    $("#clocks").load(location.href + " #clocks");
+                }
+                setInterval(time, 8000);
+            </script>
+        </div>
     </div>
 </h:body>
 </f:view>
