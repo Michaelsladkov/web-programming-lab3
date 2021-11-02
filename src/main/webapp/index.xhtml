@@ -19,7 +19,7 @@
         <p>Группа: P3231</p>
         <p>Вариант: 8385</p>
     </div>
-    <div id="content">
+    <div class="content">
         <div id="clock-container">
             <table id="clocks">
                 <tr id="time">
@@ -52,7 +52,17 @@
                 setInterval(time, 8000);
             </script>
         </div>
-        <h:commandButton action="toMain" value="to main"/>
+        <div id="navigation-container">
+            <h:form>
+                <h:commandButton class="navigation-button" action="toMain" value="К сути"/>
+            </h:form>
+        </div>
+        <br/>
+    </div>
+    <div class="content" id="ads-container">
+        <p class="banner">
+            Здесь могла быть ваша реклама
+        </p>
     </div>
 </h:body>
 </f:view>
