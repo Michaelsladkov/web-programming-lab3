@@ -4,4 +4,33 @@
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    display: inline-block;
+}
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+#canvas {
+    width: 320px;
+    height: 320px;
+    position: relative;
+    top: -320px;
+    left: 0px;
+    z-index: 1;
+}
+
+#background {
+    width: 320px;
+    height: 320px;
+    position: relative;
+    z-index: 0;
+}
+
+#image-container {
+    width: 340px;
+    height: 340px;
+    padding: 10px 0 0 10px;
 }
