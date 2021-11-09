@@ -9,6 +9,7 @@
         <title>Lab 3</title>
         <h:outputStylesheet library="styles" name="main.css"/>
         <h:outputStylesheet library="styles" name="shots-style.css"/>
+        <h:outputStylesheet library="styles" name="form.css"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
     </h:head>
     <body>
@@ -21,7 +22,19 @@
         </div>
 
         <div id="form-container" class="container">
-            ЖАБА ХУЙ СОСИ
+            <h:form>
+                <div id="y-value" class="field">
+                    Y:
+                    <label>
+                        <h:inputText id="y-input" class="text-field" required="true" requiredMessage="Введите число y"
+                                     validatorMessage="Число должно лежать в диапазоне (-3 ... 3)"
+                                     value="#{shotBean.y}"
+                                     converter="javax.faces.Double"
+                                     converterMessage="Некорректное число"
+                        />
+                    </label>
+                </div>
+            </h:form>
         </div>
 
         <br/>
