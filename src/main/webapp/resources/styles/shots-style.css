@@ -1,0 +1,7 @@
+.container {
+    border: black solid 4px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}

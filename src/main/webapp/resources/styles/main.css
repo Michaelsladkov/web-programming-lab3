@@ -3,7 +3,7 @@
     --gradient-second-color: rgb(217, 115, 255);
 }
 
-#body {
+body {
     background: linear-gradient(60deg, var(--gradient-first-color), var(--gradient-second-color));
     min-height: 99vh;
     font-family: Bahnschrift, serif;
@@ -62,14 +62,14 @@
 }
 
 #clock-container {
-    position: relative;
-    top: 0;
     width: 30vh;
 }
 
 #navigation-container {
     padding: 5px;
     width: 70vh;
+    position: relative;
+    top: -60px;
 }
 
 #ads-container {

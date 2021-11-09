@@ -6,7 +6,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-outcome>toMain</from-outcome>
+            <from-outcome>toShots</from-outcome>
             <to-view-id>/views/shots.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
