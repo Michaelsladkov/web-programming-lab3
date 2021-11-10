@@ -52,8 +52,8 @@ input {
     background: transparent;
 }
 
-#submit-button:hover {
-    box-shadow: 2px 2px 2px 2px black;
+.numbered-button:hover {
+    box-shadow: 0 0 2px 2px darkslategray;
 }
 
 .numbered-button {
