@@ -1,13 +1,9 @@
 package beans;
 
-import javax.faces.bean.ManagedBean;
-import javax.enterprise.context.ApplicationScoped;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@ManagedBean(name = "timeBean")
-@ApplicationScoped
 public class TimeBean {
     private static final DecimalFormat TWO_DIGITS_FORMAT = new DecimalFormat("00");
 

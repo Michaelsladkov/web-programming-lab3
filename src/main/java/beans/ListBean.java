@@ -1,16 +1,14 @@
 package beans;
 
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import orm.models.Shot;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-@ManagedBean (name = "listBean")
-@SessionScoped
 public class ListBean implements Serializable {
-    private ArrayList<ShotBean> shots;
+    private ArrayList<Shot> shots = new ArrayList();
 
-    public ArrayList<ShotBean> getShots() {
+    public ArrayList<Shot> getShots() {
         return shots;
     }
 }

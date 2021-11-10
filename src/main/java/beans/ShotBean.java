@@ -1,44 +1,39 @@
 package beans;
 
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
 
-@ManagedBean (name = "shotBean")
-@SessionScoped
 public class ShotBean implements Serializable {
-    private double y;
-    private double x;
-    private Map<Float, Boolean> rValues;
+    private float y;
+    private float x;
+    private float r;
     private boolean success;
     private LocalDateTime requestTime;
-    private double processingTime; //seconds
+    private float processingTime; //seconds
 
     @ManagedProperty(value = "#{selectRController}")
     private SelectRController rController;
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(float y) {
         this.y = y;
     }
 
-    public double getX() {
+    public float getX() {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(float x) {
         this.x = x;
     }
 
     public void shot() {
-        rValues = rController.getRSelected();
+
     }
 
     boolean checkShot(float x, double y, float r) {
@@ -66,11 +61,23 @@ public class ShotBean implements Serializable {
         return success ? "ДА" : "НЕТ";
     }
 
-    public String getRequestTime() {
+    public LocalDateTime getRequestTime() {
+        return requestTime;
+    }
+
+    public String getRequestTimeString() {
         return requestTime.format(DateTimeFormatter.ofPattern("dd-mm-yy HH:mm:ss"));
     }
 
-    public double getProcessingTime() {
+    public float getProcessingTime() {
         return processingTime;
+    }
+
+    public float getR() {
+        return r;
+    }
+
+    public void setR(float r) {
+        this.r = r;
     }
 }

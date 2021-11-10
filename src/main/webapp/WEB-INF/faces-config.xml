@@ -19,4 +19,25 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+
+    <managed-bean>
+        <managed-bean-name>shotBean</managed-bean-name>
+        <managed-bean-class>beans.ShotBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>selectRController</managed-bean-name>
+        <managed-bean-class>beans.SelectRController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>listBean</managed-bean-name>
+        <managed-bean-class>beans.ListBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>timeBean</managed-bean-name>
+        <managed-bean-class>beans.TimeBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
 </faces-config>

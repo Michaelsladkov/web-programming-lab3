@@ -1,30 +1,21 @@
 package beans;
 
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
-@ManagedBean (name = "selectRController")
-@SessionScoped
 public class SelectRController implements Serializable {
     private final Map<Float, Boolean> rSelected = new HashMap<>();
 
     public void toggle(float a) {
-        if(!rSelected.containsKey(a)){
-            rSelected.put(a, true);
-        } else {
-            rSelected.put(a, !rSelected.get(a));
-        }
-        System.out.println(rSelected);
+        boolean toggleOk = rSelected.keySet().stream()
+                .map(k -> k != a ? rSelected.put(k, false) : rSelected.put(k, true))
+                .reduce((value, combinedValue) -> combinedValue &= value).orElse(false);
+        System.out.println(toggleOk);
     }
 
-    public boolean getRSelected(float key){
-        return rSelected.containsKey(key) && rSelected.get(key);
-    }
-
-    public Map<Float, Boolean> getRSelected() {
-        return rSelected;
+    public Optional<Float> getRSelected(){
+        return rSelected.keySet().stream().filter(k -> rSelected.get(k)).findAny();
     }
 }
