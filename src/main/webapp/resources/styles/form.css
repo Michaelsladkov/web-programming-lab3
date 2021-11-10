@@ -1,4 +1,4 @@
-.radio_block {
+.checkbox-block, .button-block {
     display: inline-block;
     text-align: center;
 }
@@ -24,7 +24,7 @@ input {
     margin: 0;
     border: 0;
 }
-.radio {
+.radio, .checkbox {
     -webkit-appearance: none;
     background-color: transparent;
     border: 2px solid black;
@@ -35,11 +35,11 @@ input {
     position: relative;
 }
 
-.radio:hover {
+.radio:hover, .checkbox:hover {
     background-color: #da9bff;
 }
 
-.radio:checked {
+.radio:checked, .checkbox:checked {
     background-color: black;
 }
 
@@ -54,4 +54,34 @@ input {
 
 #submit-button:hover {
     box-shadow: 2px 2px 2px 2px black;
+}
+
+.numbered-button {
+    font-family: inherit;
+    font-size: 11px;
+    border: 2px solid black;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    margin-right: 10px;
+    padding: 3px;
+}
+
+#x-preview {
+    margin: 10px 5px 5px;
+}
+
+.fire-button {
+    padding: 10px;
+    font-size: 20px;
+    font-family: inherit;
+    border: 2px solid black;
+    border-radius: 4px;
+    background: red;
+    float: right;
+}
+
+.fire-button:hover {
+    background: #8e0e0e;
 }
