@@ -1,39 +1,57 @@
 package beans;
 
+import orm.dao.ShotDAO;
+import orm.util.ShotValidation;
+
 import javax.faces.bean.ManagedProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ShotBean implements Serializable {
-    private float y;
-    private float x;
-    private float r;
+    private Float y;
+    private Float x;
+    private Float r;
     private boolean success;
     private LocalDateTime requestTime;
     private float processingTime; //seconds
+    private String error = "";
+    private final ShotDAO shotDAO = new ShotDAO();
 
     @ManagedProperty(value = "#{selectRController}")
     private SelectRController rController;
 
-    public float getY() {
+    public Float getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(Float y) {
         this.y = y;
     }
 
-    public float getX() {
+    public Float getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public String getXString() {
+        if (x == null) return "null";
+        return x.toString();
+    }
+
+    public void setX(Float x) {
         this.x = x;
     }
 
     public void shot() {
-
+        System.out.println(rController == null);
+        if (rController == null) return;
+        r = rController.getRSelected().orElse(1f);
+        System.out.println("shot method triggered");
+        error = ShotValidation.validate(this);
+        System.out.println(error);
+        if (error.equals("")) {
+            shotDAO.save(this);
+        }
     }
 
     boolean checkShot(float x, double y, float r) {
@@ -66,18 +84,23 @@ public class ShotBean implements Serializable {
     }
 
     public String getRequestTimeString() {
-        return requestTime.format(DateTimeFormatter.ofPattern("dd-mm-yy HH:mm:ss"));
+        return requestTime.format(DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss"));
     }
 
     public float getProcessingTime() {
         return processingTime;
     }
 
-    public float getR() {
+    public Float getR() {
         return r;
     }
 
     public void setR(float r) {
         this.r = r;
+    }
+
+    public String getError() {
+        System.out.println("error requested: " + error);
+        return error;
     }
 }
