@@ -1,9 +1,9 @@
-package orm.dao;
+package dao;
 
 import beans.ShotBean;
 import org.hibernate.Session;
-import orm.models.Shot;
-import orm.util.HibernateSessionFactory;
+import models.Shot;
+import util.HibernateSessionFactory;
 
 import java.util.List;
 

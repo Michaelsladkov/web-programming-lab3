@@ -1,4 +1,4 @@
-package orm.util;
+package util;
 
 import beans.ShotBean;
 

@@ -1,2 +1,3 @@
 /target/
-/src/main/resources/hibernate.cfg.xml.tld
+/src/main/resources/hibernate.cfg.xml
+/.idea/

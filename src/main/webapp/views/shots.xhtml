@@ -20,106 +20,132 @@
         <div id="controlls">
             <div id="form-container" class="container">
                 <h:form>
+                    <h:panelGroup id="x-group">
                     <div id="x-value" class="field">
                         X:
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="-2" action="#{shotBean.setX(-2)}"/>
+                                <h:commandButton class="numbered-button" value="-2" action="#{shotBean.setX(-2)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="-1.5" action="#{shotBean.setX(-1.5)}"/>
+                                <h:commandButton class="numbered-button" value="-1.5" action="#{shotBean.setX(-1.5)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="-1" action="#{shotBean.setX(-1)}"/>
+                                <h:commandButton class="numbered-button" value="-1" action="#{shotBean.setX(-1)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="-0.5" action="#{shotBean.setX(-0.5)}"/>
+                                <h:commandButton class="numbered-button" value="-0.5" action="#{shotBean.setX(-0.5)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="0" action="#{shotBean.setX(0)}"/>
+                                <h:commandButton class="numbered-button" value="0" action="#{shotBean.setX(0)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="0.5" action="#{shotBean.setX(0.5)}"/>
+                                <h:commandButton class="numbered-button" value="0.5" action="#{shotBean.setX(0.5)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="1" action="#{shotBean.setX(1)}"/>
+                                <h:commandButton class="numbered-button" value="1" action="#{shotBean.setX(1)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="1.5" action="#{shotBean.setX(1.5)}"/>
+                                <h:commandButton class="numbered-button" value="1.5" action="#{shotBean.setX(1.5)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div class="button-block">
                             <label>
-                                <h:commandButton class="numbered-button" value="2" action="#{shotBean.setX(2)}"/>
+                                <h:commandButton class="numbered-button" value="2" action="#{shotBean.setX(2)}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:commandButton>
                             </label>
                         </div>
                         <div id="x-preview">
                             <h:outputText value="#{shotBean.x}"/>
                         </div>
                     </div>
+                    </h:panelGroup>
                     <div id="y-value" class="field">
                         Y:
                         <label>
-                            <h:inputText id="y-input" class="text-field" required="true" requiredMessage="Введите число y"
-                                         validatorMessage="Число должно лежать в диапазоне (-3 ... 3)"
+                            <h:inputText id="y-input" class="text-field"
                                          value="#{shotBean.y}"
                                          converter="javax.faces.Double"
                                          converterMessage="Некорректное число"
                             />
                         </label>
                     </div>
+                    <h:panelGroup id="r-group">
                     <div id="r-value" class="field">
                         R:
                         <div class="checkbox-block">
                             1 <br/>
                             <label>
-                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-1" value="false"
-                                                 valueChangeListener="#{selectRController.toggle(1)}"/>
+                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-1" value="#{shotBean.r1}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:selectBooleanCheckbox>
                             </label>
                         </div>
                         <div class="checkbox-block">
                             1.5 <br/>
                             <label>
-                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-15" value="false"
-                                                         valueChangeListener="#{selectRController.toggle(1.5)}"/>
+                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-15" value="#{shotBean.r15}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:selectBooleanCheckbox>
                             </label>
                         </div>
                         <div class="checkbox-block">
                             2 <br/>
                             <label>
-                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-2" value="false"
-                                                         valueChangeListener="#{selectRController.toggle(2)}"/>
+                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-2" value="#{shotBean.r2}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:selectBooleanCheckbox>
                             </label>
                         </div>
                         <div class="checkbox-block">
                             2.5 <br/>
                             <label>
-                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-25" value="false"
-                                                         valueChangeListener="#{selectRController.toggle(2.5)}"/>
+                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-25" value="#{shotBean.r25}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:selectBooleanCheckbox>
                             </label>
                         </div>
                         <div class="checkbox-block">
                             3 <br/>
                             <label>
-                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-3" value="false"
-                                                         valueChangeListener="#{selectRController.toggle(3)}"/>
+                                <h:selectBooleanCheckbox class="checkbox" id="checkbox-3" value="#{shotBean.r3}">
+                                    <f:ajax execute="@this" render="@parent"/>
+                                </h:selectBooleanCheckbox>
                             </label>
                         </div>
                     </div>
+                    </h:panelGroup>
                     <h:commandButton class="fire-button" value="FIRE!" action="#{shotBean.shot()}"/>
                 </h:form>
             </div>
@@ -133,7 +159,7 @@
         <br/>
 
         <p class="errorDisplay">
-
+            <h:outputText value="${shotBean.error}"/>
         </p>
 
         <br/>

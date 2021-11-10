@@ -1,4 +1,4 @@
-package orm.models;
+package models;
 
 import beans.ShotBean;
 import org.hibernate.annotations.Type;

@@ -1,6 +1,6 @@
 package beans;
 
-import orm.models.Shot;
+import models.Shot;
 
 import java.io.Serializable;
 import java.util.ArrayList;

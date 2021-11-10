@@ -1,9 +1,9 @@
-package orm.util;
+package util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import orm.models.Shot;
+import models.Shot;
 
 public class HibernateSessionFactory {
     private static SessionFactory sessionFactory;
