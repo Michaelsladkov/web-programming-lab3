@@ -3,6 +3,9 @@ const rProportionY = 0.3375;
 const rProportionX = 0.33;
 const xOffset = -15;
 const yOffset = -16;
+const centerX = 145;
+const centerY = 143;
+const rPixels = 106;
 
 function addShot(x, y, r, success) {
    let toPush = {
@@ -56,4 +59,20 @@ function drawDot({x, y, r, success}, canvas) {
     context.stroke();
     context.closePath();
     context.fill();
+}
+
+function processClick(eventObj) {
+    let clickX = eventObj.pageX - this.offsetLeft;
+    let clickY = eventObj.pageY - this.offsetTop;
+    let xToR = (clickX - centerX) / rPixels;
+    let yToR = (-clickY + centerY) / rPixels;
+    xToR = xToR.toFixed(2);
+    yToR = yToR.toFixed(2);
+    console.log(xToR);
+    console.log(yToR);
+    document.getElementById("j_idt14:hidden_x").value = xToR;
+    document.getElementById("j_idt14:hidden_y").value = yToR;
+    document.getElementsByClassName("fire-button")[0].click();
+    document.getElementById("j_idt14:hidden_x").value = null;
+    document.getElementById("j_idt14:hidden_y").value = null;
 }

@@ -10,8 +10,12 @@ public class ShotValidation {
         if (shot.getR() == null) {
             return VALUE_NOT_SPECIFIED + "R";
         }
+        if (shot.getY() == null && shot.getXToR() != null && shot.getYtoR()!= null) {
+            System.out.println(shot.getXToR() + "\t" + shot.getYtoR());
+            return "";
+        }
         if (shot.getY() == null) {
-            return VALUE_NOT_SPECIFIED + "Y";
+            return "Введите значение Y";
         }
         if (shot.getY() < Y_FROM || shot.getY() > Y_TO) {
             return "Y должен быть в интервале (-3, 3)";

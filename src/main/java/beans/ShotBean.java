@@ -12,6 +12,8 @@ public class ShotBean implements Serializable {
     private Float y;
     private Float x;
     private Float r;
+    private Float xToR;
+    private Float ytoR;
     private boolean success;
     private LocalDateTime requestTime;
     private float processingTime; //seconds
@@ -70,7 +72,7 @@ public class ShotBean implements Serializable {
     }
 
     public void setR25(boolean r25) {
-        this.r25 = true;
+        this.r25 = r25;
         r1 = false;
         r15 = false;
         r2 = false;
@@ -123,6 +125,7 @@ public class ShotBean implements Serializable {
             this.y = Float.parseFloat(yStr);
         } catch (NumberFormatException e) {
             error = "Y Должен быть числом из отрезка (-3, 3)";
+            y = null;
         }
     }
 
@@ -151,10 +154,20 @@ public class ShotBean implements Serializable {
         error = ShotValidation.validate(this);
         System.out.println(error);
         if (!error.equals("")) return;
+        Float tmpX = x;
+        Float tmpY = y;
+        if (xToR != null && ytoR != null) {
+            x = new Float(xToR * r);
+            y = new Float(ytoR * r);
+        }
         success = checkShot(x, y, r);
         requestTime = LocalDateTime.now();
         processingTime = (System.nanoTime() - begin)/NANOSECONDS_IN_SECOND;
         shotDAO.save(this);
+        x = tmpX;
+        y = tmpY;
+        xToR = null;
+        ytoR = null;
     }
 
     boolean checkShot(float x, float y, float r) {
@@ -199,5 +212,34 @@ public class ShotBean implements Serializable {
     public int hashCode() {
         return x.intValue() * 12412434 + y.intValue() * 497 + r.intValue() * 51 + requestTime.getNano() +
                 Float.valueOf(processingTime * NANOSECONDS_IN_SECOND).intValue();
+    }
+
+    public Float getXToR() {
+        return xToR;
+    }
+
+    public void setXToR(Float xToR) {
+        this.xToR = xToR;
+        if (xToR == null) return;
+        Float r = getRSelected();
+        if (r == null) {
+            error = "Выберите R";
+            return;
+        }
+        System.out.println("xtr");
+    }
+
+    public Float getYtoR() {
+        return ytoR;
+    }
+
+    public void setYtoR(Float ytoR) {
+        this.ytoR = ytoR;
+        if (ytoR == null) return;
+        Float r = getRSelected();
+        if (r == null) {
+            error = "Выберите R";
+            return;
+        }
     }
 }

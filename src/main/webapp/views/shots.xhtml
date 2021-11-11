@@ -25,6 +25,8 @@
         <div id="controlls">
             <div id="form-container" class="container">
                 <h:form>
+                    <h:inputHidden id="hidden_x" value="${shotBean.XToR}"/>
+                    <h:inputHidden id="hidden_y" value="${shotBean.ytoR}"/>
                     <h:panelGroup id="x-group">
                     <div id="x-value" class="field">
                         X:
@@ -150,8 +152,7 @@
                         </div>
                     </div>
                     </h:panelGroup>
-                    <h:commandButton class="fire-button" value="FIRE!" action="#{shotBean.shot()}">
-                        <f:ajax execute="@this" render="@all"/>
+                    <h:commandButton class="fire-button" type="submit" value="FIRE!" action="#{shotBean.shot()}">
                     </h:commandButton>
                     <h:commandButton class="clear-button" value="Отчистить таблицу" action="#{listBean.clear}">
                         <f:ajax execute="@this" render="@all"/>
@@ -204,6 +205,7 @@
     </div>
     </body>
     <script>
+        document.getElementsByTagName("canvas")[0].onclick = processClick;
         <c:set var="shots" value="${listBean.getShots()}"/>
         <c:forEach items="${shots}" var="shot">
             addShot(${shot.x}, ${shot.y}, ${shot.r}, ${shot.success});
