@@ -59,6 +59,8 @@ public class Shot implements Comparable<Shot> {
         return r;
     }
 
+    public boolean isSuccess() {return success;}
+
     public LocalDateTime getDateTime() {
         return dateTime;
     }

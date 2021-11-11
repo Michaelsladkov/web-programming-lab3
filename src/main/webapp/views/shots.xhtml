@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 <f:view>
     <h:head>
         <title>Lab 3</title>
@@ -10,9 +11,13 @@
         <h:outputStylesheet library="styles" name="shots-style.css"/>
         <h:outputStylesheet library="styles" name="form.css"/>
         <h:outputStylesheet library="styles" name="results.css"/>
+        <h:outputScript library="scripts" name="graph.js"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
     </h:head>
     <body>
+    <script>
+        clearBuffer();
+    </script>
     <div id="content">
         <h:form>
             <h:commandButton value="На главную" styleClass="navigation-button" action="toIndex"/>
@@ -198,5 +203,12 @@
         </h:panelGroup>
     </div>
     </body>
+    <script>
+        <c:set var="shots" value="${listBean.getShots()}"/>
+        <c:forEach items="${shots}" var="shot">
+            addShot(${shot.x}, ${shot.y}, ${shot.r}, ${shot.success});
+        </c:forEach>
+        drawDots();
+    </script>
 </f:view>
 </html>
