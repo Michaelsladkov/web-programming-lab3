@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ShotBean implements Serializable {
+    private static final float NANOSECONDS_IN_SECOND = 1000000000f;
     private Float y;
     private Float x;
     private Float r;
@@ -16,6 +17,7 @@ public class ShotBean implements Serializable {
     private float processingTime; //seconds
     private String error = "";
     private final ShotDAO shotDAO = new ShotDAO();
+    private String yStr;
 
     private boolean r1 = false;
     private boolean r15 = false;
@@ -34,6 +36,7 @@ public class ShotBean implements Serializable {
         r2 = false;
         r25 = false;
         r3 = false;
+        printR();
     }
 
     public boolean isR15() {
@@ -46,6 +49,7 @@ public class ShotBean implements Serializable {
         r2 = false;
         r25 = false;
         r3 = false;
+        printR();
     }
 
     public boolean isR2() {
@@ -58,6 +62,7 @@ public class ShotBean implements Serializable {
         r15 = false;
         r25 = false;
         r3 = false;
+        printR();
     }
 
     public boolean isR25() {
@@ -65,11 +70,12 @@ public class ShotBean implements Serializable {
     }
 
     public void setR25(boolean r25) {
-        this.r25 = r25;
+        this.r25 = true;
         r1 = false;
         r15 = false;
         r2 = false;
         r3 = false;
+        printR();
     }
 
     public boolean isR3() {
@@ -82,14 +88,22 @@ public class ShotBean implements Serializable {
         r15 = false;
         r2 = false;
         r25 = false;
+        printR();
     }
 
-    public float getRSelected() {
+    public Float getRSelected() {
+        printR();
         if (r1) return 1f;
         if (r15) return 1.5f;
         if (r2) return 2f;
         if (r25) return 2.5f;
-        return 3f;
+        if (r3) return 3f;
+        return null;
+    }
+
+    private void printR() {
+        System.out.println("r1: " + r1 + "  r15: " + r15 +
+                "   r2: " + r2 + "   r25: " + r25 + "   r3: " + r3);
     }
 
     public Float getY() {
@@ -98,6 +112,22 @@ public class ShotBean implements Serializable {
 
     public void setY(Float y) {
         this.y = y;
+    }
+
+    public void setYStr(String yStr) {
+        if (yStr.matches("[ \t]*")) {
+            this.y = null;
+            return;
+        }
+        try {
+            this.y = Float.parseFloat(yStr);
+        } catch (NumberFormatException e) {
+            error = "Y Должен быть числом из отрезка (-3, 3)";
+        }
+    }
+
+    public String getYStr() {
+        return y != null ? y.toString() : "";
     }
 
     public Float getX() {
@@ -114,16 +144,20 @@ public class ShotBean implements Serializable {
     }
 
     public void shot() {
-        r = getRSelected();
+        long begin = System.nanoTime();
         System.out.println("shot method triggered");
+        r = getRSelected();
+        System.out.println(r);
         error = ShotValidation.validate(this);
         System.out.println(error);
-        if (error.equals("")) {
-            shotDAO.save(this);
-        }
+        if (!error.equals("")) return;
+        success = checkShot(x, y, r);
+        requestTime = LocalDateTime.now();
+        processingTime = (System.nanoTime() - begin)/NANOSECONDS_IN_SECOND;
+        shotDAO.save(this);
     }
 
-    boolean checkShot(float x, double y, float r) {
+    boolean checkShot(float x, float y, float r) {
         if (x > 0) {
             if (y > 0) return false;
             else return x <= r && y >= -r/2;
@@ -140,16 +174,8 @@ public class ShotBean implements Serializable {
         return success;
     }
 
-    public String isSuccessString() {
-        return success ? "ДА" : "НЕТ";
-    }
-
     public LocalDateTime getRequestTime() {
         return requestTime;
-    }
-
-    public String getRequestTimeString() {
-        return requestTime.format(DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss"));
     }
 
     public float getProcessingTime() {
@@ -167,5 +193,11 @@ public class ShotBean implements Serializable {
     public String getError() {
         System.out.println("error requested: " + error);
         return error;
+    }
+
+    @Override
+    public int hashCode() {
+        return x.intValue() * 12412434 + y.intValue() * 497 + r.intValue() * 51 + requestTime.getNano() +
+                Float.valueOf(processingTime * NANOSECONDS_IN_SECOND).intValue();
     }
 }

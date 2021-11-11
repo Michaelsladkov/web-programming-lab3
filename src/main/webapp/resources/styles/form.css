@@ -85,3 +85,17 @@ input {
 .fire-button:hover {
     background: #8e0e0e;
 }
+
+.clear-button {
+    padding: 10px;
+    font-size: 20px;
+    font-family: inherit;
+    border: 2px solid black;
+    border-radius: 4px;
+    background: transparent;
+    float: left;
+}
+
+.clear-button:hover {
+    background: rgba(119, 15, 155, 0.57);
+}

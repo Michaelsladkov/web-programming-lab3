@@ -1,14 +1,18 @@
 package beans;
 
+import dao.ShotDAO;
 import models.Shot;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ListBean implements Serializable {
-    private ArrayList<Shot> shots = new ArrayList();
+    ShotDAO shotDAO = new ShotDAO();
+    public List<Shot> getShots() {
+        return shotDAO.findAll();
+    }
 
-    public ArrayList<Shot> getShots() {
-        return shots;
+    public void clear() {
+        shotDAO.clear();
     }
 }

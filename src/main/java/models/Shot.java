@@ -8,10 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table (name = "WEB3_SHOTS")
-public class Shot {
+public class Shot implements Comparable<Shot> {
     @Id
     private int id;
 
@@ -62,7 +63,34 @@ public class Shot {
         return dateTime;
     }
 
+    public String isSuccessString() {
+        return success ? "ДА" : "НЕТ";
+    }
+
+    public String getRequestTimeString() {
+        return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss"));
+    }
+
     public float getProcessingTime() {
         return processingTime;
+    }
+
+    public String getProcessingTimeString() {return String.format("%f", processingTime);}
+
+    @Override
+    public String toString() {
+        return "Shot hibernate model\n" +
+                "\tid: " + id + "\n" +
+                "\tx: " + x + "\n" +
+                "\ty: " + y + "\n" +
+                "\tr: " + r + "\n" +
+                "\tdate-time: " + dateTime + "\n" +
+                "\tprocessing-time: " + processingTime + "\n" +
+                "\tsuccess: " + success;
+    }
+
+    @Override
+    public int compareTo(Shot o) {
+        return dateTime.compareTo(o.getDateTime());
     }
 }

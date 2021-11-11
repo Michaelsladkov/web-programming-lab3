@@ -95,10 +95,9 @@
                         Y:
                         <label>
                             <h:inputText id="y-input" class="text-field"
-                                         value="#{shotBean.y}"
-                                         converter="javax.faces.Double"
-                                         converterMessage="Некорректное число"
-                            />
+                                         value="#{shotBean.YStr}">
+                                <f:ajax execute="@this" render="@this"/>
+                            </h:inputText>
                         </label>
                     </div>
                     <h:panelGroup id="r-group">
@@ -146,7 +145,12 @@
                         </div>
                     </div>
                     </h:panelGroup>
-                    <h:commandButton class="fire-button" value="FIRE!" action="#{shotBean.shot()}"/>
+                    <h:commandButton class="fire-button" value="FIRE!" action="#{shotBean.shot()}">
+                        <f:ajax execute="@this" render="@all"/>
+                    </h:commandButton>
+                    <h:commandButton class="clear-button" value="Отчистить таблицу" action="#{listBean.clear}">
+                        <f:ajax execute="@this" render="@all"/>
+                    </h:commandButton>
                 </h:form>
             </div>
             <div id="image-container" class="container">
@@ -157,7 +161,7 @@
             </div>
         </div>
         <br/>
-
+        <h:panelGroup id="display-panel">
         <p class="errorDisplay">
             <h:outputText value="${shotBean.error}"/>
         </p>
@@ -168,29 +172,30 @@
                      headerClass="table-header">
             <h:column>
                 <f:facet name="header">X</f:facet>
-                #{shot.x}
+                ${shot.x}
             </h:column>
             <h:column>
                 <f:facet name="header">Y</f:facet>
-                #{shot.y}
+                ${shot.y}
             </h:column>
             <h:column>
                 <f:facet name="header">R</f:facet>
-                #{shot.r}
+                ${shot.r}
             </h:column>
             <h:column>
                 <f:facet name="header">Дата и Время</f:facet>
-                #{shot.requestTimeString}
+                ${shot.requestTimeString}
             </h:column>
             <h:column>
                 <f:facet name="header">Время Обработки</f:facet>
-                #{shot.processingTime}
+                ${shot.getProcessingTimeString()}
             </h:column>
             <h:column>
                 <f:facet name="header">Попал ?</f:facet>
-                #{shot.isSuccessString}
+                ${shot.isSuccessString()}
             </h:column>
         </h:dataTable>
+        </h:panelGroup>
     </div>
     </body>
 </f:view>
