@@ -27,30 +27,30 @@ public class ShotBean implements Serializable {
     private boolean r25 = false;
     private boolean r3 = false;
 
+    private void falseAllR() {
+        r1 = r15 = r2 = r25 = r3 = false;
+    }
 
     public boolean isR1() {
         return r1;
     }
 
     public void setR1(boolean r1) {
-        this.r1 = r1;
-        r15 = false;
-        r2 = false;
-        r25 = false;
-        r3 = false;
+        if (!r1) return;
+        falseAllR();
+        this.r1 = true;
         printR();
     }
+
 
     public boolean isR15() {
         return r15;
     }
 
     public void setR15(boolean r15) {
-        this.r15 = r15;
-        r1 = false;
-        r2 = false;
-        r25 = false;
-        r3 = false;
+        if (!r15) return;
+        falseAllR();
+        this.r15 = true;
         printR();
     }
 
@@ -59,11 +59,9 @@ public class ShotBean implements Serializable {
     }
 
     public void setR2(boolean r2) {
-        this.r2 = r2;
-        r1 = false;
-        r15 = false;
-        r25 = false;
-        r3 = false;
+        if (!r2) return;
+        falseAllR();
+        this.r2 = true;
         printR();
     }
 
@@ -72,11 +70,9 @@ public class ShotBean implements Serializable {
     }
 
     public void setR25(boolean r25) {
-        this.r25 = r25;
-        r1 = false;
-        r15 = false;
-        r2 = false;
-        r3 = false;
+        if (!r25) return;
+        falseAllR();
+        this.r25 = true;
         printR();
     }
 
@@ -85,11 +81,9 @@ public class ShotBean implements Serializable {
     }
 
     public void setR3(boolean r3) {
-        this.r3 = r3;
-        r1 = false;
-        r15 = false;
-        r2 = false;
-        r25 = false;
+        if (!r3) return;
+        falseAllR();
+        this.r3 = true;
         printR();
     }
 
