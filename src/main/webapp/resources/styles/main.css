@@ -68,8 +68,8 @@ body {
 #navigation-container {
     padding: 5px;
     width: 70vh;
-    position: relative;
-    top: -60px;
+    /*position: relative;*/
+    /*top: -60px;*/
 }
 
 #ads-container {
