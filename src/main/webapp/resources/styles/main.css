@@ -31,8 +31,10 @@ body {
 }
 
 .navigation-button {
-    margin: 0 20px 20px;
-    width: 60vh;
+    /*margin: 0 20px 20px;*/
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 60%;
     height: 80px;
     background: transparent;
     border: 4px solid black;
@@ -49,30 +51,39 @@ body {
     min-height: 228px;
     border-radius: 3px;
     padding: 10px;
-    margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
     align-content: center;
     vertical-align: middle;
 }
 
-.content div {
-    display: inline-block;
-    margin: 20px;
+/*.content div {*/
+/*    display: inline-block;*/
+/*    margin: 20px;*/
+/*}*/
+
+
+/*#navigation-container {*/
+/*    padding: 5px;*/
+/*    width: 70%;*/
+/*    !*position: relative;*!*/
+/*    !*top: -60px;*!*/
+/*}*/
+
+#ads-container {
+    width: 90%;
+    float: left;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 
 #clock-container {
-    width: 30vh;
+    float: left;
+    /*width: 50%;*/
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #navigation-container {
-    padding: 5px;
-    width: 70vh;
-    /*position: relative;*/
-    /*top: -60px;*/
-}
-
-#ads-container {
-    width: 90vh;
-    vertical-align: middle;
+    float: right;
+    width: 50%;
+    margin-right: 20px;
 }
