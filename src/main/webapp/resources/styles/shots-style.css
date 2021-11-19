@@ -6,7 +6,6 @@
     margin: 10px;
     display: inline-block;
     padding: 10px;
-    float: top;
 }
 
 #content {
@@ -19,8 +18,8 @@
     width: 320px;
     height: 320px;
     position: relative;
-    /*top: -320px;
-    left: 0px;*/
+    top: -320px;
+    left: 0px;
     z-index: 1;
 }
 
@@ -35,11 +34,13 @@
     width: 380px;
     height: 340px;
     padding: 40px 0 0 40px;
+    float: right;
 }
 
 #form-container {
     /*position: relative;
     bottom: 490px;*/
+    float: left;
 }
 
 #controlls {

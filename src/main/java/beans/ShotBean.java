@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ShotBean implements Serializable {
     private static final float NANOSECONDS_IN_SECOND = 1000000000f;
+    private static final String IMAGE_PATH_FORMAT = "../resources/images/3r%d.png";
     private Float y;
     private Float x;
     private Float r;
@@ -235,5 +236,9 @@ public class ShotBean implements Serializable {
             error = "Выберите R";
             return;
         }
+    }
+
+    public String getImagePath() {
+        return String.format(IMAGE_PATH_FORMAT, (int)(r * 10));
     }
 }

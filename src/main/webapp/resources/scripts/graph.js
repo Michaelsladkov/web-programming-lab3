@@ -1,4 +1,5 @@
 let buffer = [];
+let canv;
 const rProportionY = 0.3375;
 const rProportionX = 0.33;
 const xOffset = -15;
@@ -17,6 +18,14 @@ function addShot(x, y, r, success) {
    buffer.push(toPush);
 }
 
+function init() {
+    clearBuffer();
+    canv = document.getElementsByTagName("canvas")[0];
+    let img = document.getElementsByTagName("img")[0];
+    canv.drawImage(img);
+    document.getElementsByTagName("canvas")[0].onclick = processClick;
+}
+
 function clearBuffer() {
     buffer = [];
 }
@@ -27,7 +36,6 @@ function getBuffer() {
 
 function drawDots() {
     console.log("called")
-    let canv = document.getElementsByTagName("canvas")[0];
     canv.width=320
     canv.height=320
     canv.getContext("2d").clearRect(0, 0, canv.width, canv.height);

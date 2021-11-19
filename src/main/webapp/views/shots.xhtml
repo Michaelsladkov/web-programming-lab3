@@ -12,12 +12,9 @@
         <h:outputStylesheet library="styles" name="form.css"/>
         <h:outputStylesheet library="styles" name="results.css"/>
         <h:outputScript library="scripts" name="graph.js"/>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"/>
     </h:head>
     <body>
-    <script>
-        clearBuffer();
-    </script>
     <div id="content">
         <h:form>
             <h:commandButton value="На главную" styleClass="navigation-button" action="toIndex"/>
@@ -160,8 +157,9 @@
                 </h:form>
             </div>
             <div id="image-container" class="container">
+                <img id="background" src="../resources/images/3r10.png" alt="image failed"/>
                 <canvas id="canvas">
-                    <h:graphicImage id="background" library="images" name="web3.png" alt="image failed"/>
+
                 </canvas>
             </div>
         </div>
@@ -204,7 +202,7 @@
     </div>
     </body>
     <script>
-        document.getElementsByTagName("canvas")[0].onclick = processClick;
+        init();
         <c:set var="shots" value="${listBean.getShots()}"/>
         <c:forEach items="${shots}" var="shot">
             addShot(${shot.x}, ${shot.y}, ${shot.r}, ${shot.success});
