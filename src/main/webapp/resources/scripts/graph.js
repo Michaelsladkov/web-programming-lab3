@@ -21,9 +21,7 @@ function addShot(x, y, r, success) {
 function init() {
     clearBuffer();
     canv = document.getElementsByTagName("canvas")[0];
-    let img = document.getElementsByTagName("img")[0];
-    canv.drawImage(img);
-    document.getElementsByTagName("canvas")[0].onclick = processClick;
+    canv.onclick = processClick;
 }
 
 function clearBuffer() {
