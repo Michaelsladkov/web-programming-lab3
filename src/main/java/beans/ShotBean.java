@@ -239,6 +239,9 @@ public class ShotBean implements Serializable {
     }
 
     public String getImagePath() {
-        return String.format(IMAGE_PATH_FORMAT, (int)(r * 10));
+        r = getRSelected();
+        String res = String.format(IMAGE_PATH_FORMAT, (int)((r != null ? r : 1) * 10));
+        System.err.println(res);
+        return res;
     }
 }
