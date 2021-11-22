@@ -5,7 +5,6 @@ import util.ShotValidation;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class ShotBean implements Serializable {
     private static final float NANOSECONDS_IN_SECOND = 1000000000f;
@@ -155,7 +154,7 @@ public class ShotBean implements Serializable {
             x = new Float(xToR * r);
             y = new Float(ytoR * r);
         }
-        success = checkShot(x, y, r);
+        success = checkShot(x, y);
         requestTime = LocalDateTime.now();
         processingTime = (System.nanoTime() - begin)/NANOSECONDS_IN_SECOND;
         shotDAO.save(this);
@@ -165,15 +164,15 @@ public class ShotBean implements Serializable {
         ytoR = null;
     }
 
-    boolean checkShot(float x, float y, float r) {
+    boolean checkShot(float x, float y) {
         if (x > 0) {
             if (y > 0) return false;
-            else return x <= r && y >= -r/2;
+            else return x <= 1 && y >= -0.5;
         } else {
             if (y > 0) {
-                return y <= x + r/2;
+                return y <= x + 0.5;
             } else {
-                return x*x + y*y <= r*r/4;
+                return x*x + y*y <= 0.25;
             }
         }
     }
