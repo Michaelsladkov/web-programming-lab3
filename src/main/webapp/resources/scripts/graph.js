@@ -37,25 +37,27 @@ function drawDots() {
     canv.width=320
     canv.height=320
     canv.getContext("2d").clearRect(0, 0, canv.width, canv.height);
-    for (let dot of buffer) {
-        console.log("draw " + dot)
-        drawDot(dot, canv);
+    for (let dot of buffer.reverse()) {
+        drawDot(dot, canv, true);
     }
+    drawDot(buffer[0], canv, false);
 }
 
-function drawDot({x, y, r, success}, canvas) {
+function drawDot({x, y, r, success}, canvas, isGray) {
     let context = canvas.getContext("2d");
     let drawnX = (rProportionY * (x / r) + 0.5 )* canvas.width + xOffset;
     let drawnY = (-rProportionX * (y / r) + 0.5 )* canvas.height + yOffset;
 
     console.log(success)
-    if (success) {
-        context.fillStyle = 'red';
-        console.log("red");
+    if (!isGray) {
+        if (success) {
+            context.fillStyle = 'red';
+        } else {
+            context.fillStyle = 'blue';
+        }
     }
     else {
-        context.fillStyle = 'blue';
-        console.log("blue");
+        context.fillStyle = 'gray';
     }
     context.lineWidth = 1.5;
     context.strokeStyle = 'black';
