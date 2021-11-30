@@ -99,10 +99,11 @@
                         Y:
                         <label>
                             <h:inputText id="y-input" class="text-field"
-                                         value="#{shotBean.YStr}">
+                                         value="#{shotBean.YStr}" validator="yValidator">
                                 <f:ajax execute="@this" render="@this"/>
                             </h:inputText>
                         </label>
+                        <h:message for="y-input"/>
                     </div>
                     <h:panelGroup id="r-group">
                     <div id="r-value" class="field">
