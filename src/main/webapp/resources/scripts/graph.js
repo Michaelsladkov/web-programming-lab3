@@ -40,7 +40,7 @@ function drawDots() {
     for (let dot of buffer.reverse()) {
         drawDot(dot, canv, true);
     }
-    drawDot(buffer[0], canv, false);
+    drawDot(buffer.reverse()[0], canv, false);
 }
 
 function drawDot({x, y, r, success}, canvas, isGray) {
