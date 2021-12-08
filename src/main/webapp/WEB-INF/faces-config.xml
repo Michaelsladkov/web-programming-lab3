@@ -40,4 +40,13 @@
         <managed-bean-class>beans.TimeBean</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>yValidator</managed-bean-name>
+        <managed-bean-class>validators.YValidator</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <validator>
+        <validator-id>yValidator</validator-id>
+        <validator-class>validators.YValidator</validator-class>
+    </validator>
 </faces-config>
