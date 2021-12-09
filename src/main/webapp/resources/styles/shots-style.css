@@ -3,7 +3,7 @@
     border-radius: 4px;
     width: fit-content;
     height: fit-content;
-    margin: 10px;
+    margin: 20px 10px;
     display: inline-block;
     padding: 10px;
 }
@@ -44,7 +44,12 @@
 }
 
 #controlls {
-    /*height: 400px;*/
     margin-left: auto;
     margin-right: auto;
+}
+
+#navigation-container-shots {
+    float: right;
+    width: 100%;
+    margin-right: 10px;
 }
