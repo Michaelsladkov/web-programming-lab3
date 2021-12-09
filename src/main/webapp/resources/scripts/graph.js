@@ -80,7 +80,7 @@ function processClick(eventObj) {
     console.log(yToR);
     document.getElementById("j_idt14:hidden_x").value = xToR;
     document.getElementById("j_idt14:hidden_y").value = yToR;
-    document.getElementsByClassName("fire-button")[0].click();
+    document.getElementById("j_idt14:hidden_submit").click();
     document.getElementById("j_idt14:hidden_x").value = null;
     document.getElementById("j_idt14:hidden_y").value = null;
 }

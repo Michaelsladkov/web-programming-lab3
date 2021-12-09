@@ -26,6 +26,9 @@
                 <h:form>
                     <h:inputHidden id="hidden_x" value="${shotBean.XToR}"/>
                     <h:inputHidden id="hidden_y" value="${shotBean.ytoR}"/>
+                    <h:commandButton id="hidden_submit" type="submit" action="#{shotBean.shot()}"/>
+                </h:form>
+                <h:form>
                     <h:panelGroup id="x-group">
                         <div id="x-value" class="field">
                             X:
