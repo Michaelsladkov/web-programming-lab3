@@ -3,6 +3,8 @@ package beans;
 import dao.ShotDAO;
 import util.ShotValidation;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -20,6 +22,7 @@ public class ShotBean implements Serializable {
     private String error = "";
     private final ShotDAO shotDAO = new ShotDAO();
     private String yStr;
+    private long sessionId;
 
     private boolean r1 = false;
     private boolean r15 = false;
@@ -142,6 +145,10 @@ public class ShotBean implements Serializable {
 
     public void shot() {
         long begin = System.nanoTime();
+        FacesContext fCtx = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(true);
+        String sessionIdStr = session.getId();
+        sessionId = sessionIdStr.hashCode();
         System.out.println("shot method triggered");
         r = getRSelected();
         System.out.println(r);
@@ -242,5 +249,9 @@ public class ShotBean implements Serializable {
         String res = String.format(IMAGE_PATH_FORMAT, (int)((r != null ? r : 1) * 10));
         System.err.println(res);
         return res;
+    }
+
+    public long getSessionId() {
+        return sessionId;
     }
 }

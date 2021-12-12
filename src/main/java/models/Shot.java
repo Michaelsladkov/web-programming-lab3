@@ -31,6 +31,9 @@ public class Shot implements Comparable<Shot> {
     @Column(name = "execution_time")
     private float processingTime;
 
+    @Column(name = "session_id")
+    private long sessionId;
+
     @Column(name = "success")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean success;
@@ -45,6 +48,11 @@ public class Shot implements Comparable<Shot> {
         this.dateTime = bean.getRequestTime();
         this.processingTime = bean.getProcessingTime();
         this.success = bean.isSuccess();
+        this.sessionId = bean.getSessionId();
+    }
+
+    public long getSessionId() {
+        return sessionId;
     }
 
     public float getX() {

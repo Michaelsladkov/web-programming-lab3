@@ -29,10 +29,10 @@ public class ShotDAO {
         session.close();
     }
 
-    public void clear() {
+    public void clear(long sessionCode) {
         Session session = HibernateSessionFactory.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.createQuery("DELETE FROM Shot ").executeUpdate();
+        session.createQuery("DELETE FROM Shot WHERE sessionId  =" + sessionCode).executeUpdate();
         tx1.commit();
         session.close();
     }
