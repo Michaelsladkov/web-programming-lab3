@@ -1,11 +1,14 @@
 package beans;
 
 import dao.ShotDAO;
+import mbeans.ClickIntervalCalculator;
 import util.ShotValidation;
 
 import javax.faces.context.FacesContext;
+import javax.management.*;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
+import java.lang.management.ManagementFactory;
 import java.time.LocalDateTime;
 
 public class ShotBean implements Serializable {
@@ -23,12 +26,33 @@ public class ShotBean implements Serializable {
     private final ShotDAO shotDAO = new ShotDAO();
     private String yStr;
     private long sessionId;
+    private ClickIntervalCalculator mbean;
 
     private boolean r1 = false;
     private boolean r15 = false;
     private boolean r2 = false;
     private boolean r25 = false;
     private boolean r3 = false;
+
+    {
+        MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+        ObjectName name = null;
+        try {
+            name = new ObjectName("msladkov.mbeans:type=My");
+        } catch (MalformedObjectNameException e) {
+            e.printStackTrace();
+        }
+        mbean = new ClickIntervalCalculator();
+        try {
+            mbs.registerMBean(mbean, name);
+        } catch (InstanceAlreadyExistsException e) {
+            e.printStackTrace();
+        } catch (MBeanRegistrationException e) {
+            e.printStackTrace();
+        } catch (NotCompliantMBeanException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void falseAllR() {
         r1 = r15 = r2 = r25 = r3 = false;
@@ -158,6 +182,7 @@ public class ShotBean implements Serializable {
         Float tmpX = x;
         Float tmpY = y;
         if (xToR != null && ytoR != null) {
+            mbean.registerClick();
             x = new Float(xToR * r);
             y = new Float(ytoR * r);
         }
