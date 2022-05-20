@@ -2,6 +2,7 @@ package beans;
 
 import dao.ShotDAO;
 import mbeans.ClickIntervalCalculator;
+import mbeans.DotsCounter;
 import util.ShotValidation;
 
 import javax.faces.context.FacesContext;
@@ -26,7 +27,8 @@ public class ShotBean implements Serializable {
     private final ShotDAO shotDAO = new ShotDAO();
     private String yStr;
     private long sessionId;
-    private ClickIntervalCalculator mbean;
+    private final ClickIntervalCalculator intervalCalculatorMBean;
+    private final DotsCounter dotsCounterMBean;
 
     private boolean r1 = false;
     private boolean r15 = false;
@@ -36,20 +38,20 @@ public class ShotBean implements Serializable {
 
     {
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-        ObjectName name = null;
+        ObjectName avgIntervalCalculatorName = null;
+        ObjectName dotsCounterName = null;
         try {
-            name = new ObjectName("msladkov.mbeans:type=My");
+            avgIntervalCalculatorName = new ObjectName("msladkov.mbeans:type=AvgIntervalCalculator");
+            dotsCounterName = new ObjectName("msladkov.mbeans:type=DotsCounter");
         } catch (MalformedObjectNameException e) {
             e.printStackTrace();
         }
-        mbean = new ClickIntervalCalculator();
+        intervalCalculatorMBean = new ClickIntervalCalculator();
+        dotsCounterMBean = new DotsCounter();
         try {
-            mbs.registerMBean(mbean, name);
-        } catch (InstanceAlreadyExistsException e) {
-            e.printStackTrace();
-        } catch (MBeanRegistrationException e) {
-            e.printStackTrace();
-        } catch (NotCompliantMBeanException e) {
+            mbs.registerMBean(intervalCalculatorMBean, avgIntervalCalculatorName);
+            mbs.registerMBean(dotsCounterMBean, dotsCounterName);
+        } catch (InstanceAlreadyExistsException|MBeanRegistrationException|NotCompliantMBeanException e) {
             e.printStackTrace();
         }
     }
@@ -182,14 +184,15 @@ public class ShotBean implements Serializable {
         Float tmpX = x;
         Float tmpY = y;
         if (xToR != null && ytoR != null) {
-            mbean.registerClick();
-            x = new Float(xToR * r);
-            y = new Float(ytoR * r);
+            intervalCalculatorMBean.registerClick();
+            x = xToR * r;
+            y = ytoR * r;
         }
         success = checkShot(x, y);
         requestTime = LocalDateTime.now();
         processingTime = (System.nanoTime() - begin)/NANOSECONDS_IN_SECOND;
         shotDAO.save(this);
+        dotsCounterMBean.registerDot(success);
         x = tmpX;
         y = tmpY;
         xToR = null;
@@ -265,7 +268,6 @@ public class ShotBean implements Serializable {
         Float r = getRSelected();
         if (r == null) {
             error = "Выберите R";
-            return;
         }
     }
 
